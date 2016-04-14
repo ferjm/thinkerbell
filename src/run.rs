@@ -455,7 +455,7 @@ impl<Env> ExecutionTask<Env> where Env: ExecutableDevEnv + Debug {
             // Ahah, we have just triggered the statements!
             debug!("[Thinkerbell update_condition {}] Triggering {} statements.", name, self.script.rules[rule_index].execute.len());
             for (statement, statement_index) in self.script.rules[rule_index].execute.iter().zip(0..) {
-                debug!("[Thinkerbell update_condition {}] Triggering statement {}/{}.", name, statement_index, self.script.rules[rule_index].execute.len());
+                debug!("[Thinkerbell update_conditiooooooooooooooooooooooooooooooooooooon {}] Triggering statement {}/{}.", name, statement_index, self.script.rules[rule_index].execute.len());
                 let result = statement.eval(&api, &self.owner);
                 debug!("[Thinkerbell update_condition {}] Statement result {}/{}: {:?}.", name, statement_index, self.script.rules[rule_index].execute.len(), result);
 
@@ -473,6 +473,7 @@ impl<Env> ExecutionTask<Env> where Env: ExecutableDevEnv + Debug {
 
 impl<Env> Statement<CompiledCtx<Env>> where Env: ExecutableDevEnv {
     fn eval(&self, api: &Env::API, owner: &User) ->  Vec<(Id<Setter>, Result<(), Error>)> {
+        debug!("[Thinkerbell eval] {:?} {:?}", self.destination.clone(), self.value.clone());
         api.send_values(vec![Targetted {
             select: self.destination.clone(),
             payload: self.value.clone()
